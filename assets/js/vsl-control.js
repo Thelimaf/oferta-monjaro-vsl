@@ -156,10 +156,7 @@
             }
         });
 
-        // Anti-pause: se o vídeo for pausado (não pelo fim), retoma
-        video.addEventListener('pause', function () {
-            if (!allowEnd && !video.ended) tryPlay();
-        });
+        // Pause permitido (igual ao original — só pausa, sem seek)
         video.addEventListener('ended', function () { allowEnd = true; });
 
         // Bloqueia menu de contexto e atalhos de teclado no player

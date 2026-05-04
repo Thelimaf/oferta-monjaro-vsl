@@ -4,7 +4,7 @@
    ============================================================ */
 
 :root {
-    --color-hero-bg: #1a1a1a;
+    --color-hero-bg: #a60b0d;
     --color-warning: rgba(166, 11, 13, 1);
     --color-headline: #333333;
     --color-text: #333333;
@@ -106,9 +106,8 @@ img { max-width: 100%; height: auto; }
 .video-wrapper {
     position: relative;
     width: 100%;
-    max-width: 480px;       /* trava largura no desktop — vídeo é portrait 1024x1280 */
     margin: 0 auto;
-    padding-bottom: 125%;   /* 4:5 (vertical) */
+    padding-bottom: 56.25%; /* 16:9 — original mostra player horizontal com letterbox */
     height: 0;
     overflow: hidden;
     background: #000;
@@ -128,8 +127,8 @@ img { max-width: 100%; height: auto; }
 
 /* =================== MODO VSL (sem controles) =================== */
 .video-wrapper.vsl-mode video {
-    object-fit: cover;
-    pointer-events: none; /* bloqueia clique direto no vídeo */
+    object-fit: contain; /* portrait dentro de 16:9 com letterbox lateral */
+    background: #000;
 }
 
 /* Overlay "clique para ouvir" */

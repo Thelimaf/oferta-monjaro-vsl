@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:doutornature.com)",
+      "Bash(mkdir -p \"/d/Projetos/Oferta Monjaro natural/Lp/_analise\")",
+      "Bash(curl -sL -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" \"https://doutornature.com/fu/humapro/fb/vf_vsl1.php?utm_source=facebook&utm_medium=cpc&utm_campaign=padrao&sf_vid=4bb805ca2731406307d196de2bd05fc2_64\" -o \"/d/Projetos/Oferta Monjaro natural/Lp/_analise/pagina_original.html\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://doutornature.com/fu/assets/js/vsl/vf_bundle.js?v=3.0.12\" -o \"/d/Projetos/Oferta Monjaro natural/Lp/_analise/vf_bundle.js\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://doutornature.com/fu/assets/css/vsl1.css?v=1\" -o \"/d/Projetos/Oferta Monjaro natural/Lp/_analise/vsl1.css\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://doutornature.com/fu/assets/css/preload-bootstrap.css\" -o \"/d/Projetos/Oferta Monjaro natural/Lp/_analise/preload-bootstrap.css\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://doutornature.com/fu/assets/css/footer.css\" -o \"/d/Projetos/Oferta Monjaro natural/Lp/_analise/footer.css\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://vz-9259434e-c92.b-cdn.net/7c306bff-d297-4cf8-b0a3-7f1a90bcad74/playlist.m3u8\" -o \"/d/Projetos/Oferta Monjaro natural/Lp/_analise/playlist.m3u8\" -w \"HTTP_CODE:%{http_code}\\\\n\")",
+      "Bash(node -e ' *)",
+      "Bash(python -c ' *)"
+    ]
+  }
+}
