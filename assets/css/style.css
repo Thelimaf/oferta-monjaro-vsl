@@ -59,9 +59,23 @@ img { max-width: 100%; height: auto; }
 
 #video_section {
     max-width: 990px;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
 }
+
+#toggle_fullscreen {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+}
+
+@media (min-width: 768px) {
+    #video_section,
+    #toggle_fullscreen { padding-left: 25px !important; padding-right: 25px !important; }
+}
+
+.media-ref { padding-left: 16px; padding-right: 16px; }
+footer .container { padding-left: 16px !important; padding-right: 16px !important; }
+#hero .container { padding-left: 16px; padding-right: 16px; }
 
 #headline .headline {
     color: var(--color-headline);

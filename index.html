@@ -225,7 +225,23 @@
     <script>
         (function () {
             var video = document.getElementById('vsl_video');
+            video.muted = true;
+            video.setAttribute('muted', '');
+            video.setAttribute('playsinline', '');
             video.src = 'https://github.com/Thelimaf/oferta-monjaro-vsl/releases/download/v1.0.0/vsl.mp4';
+            video.load();
+            // tenta autoplay imediato (mutado é permitido em mobile)
+            var tryAutoplay = function () {
+                var p = video.play();
+                if (p && p.catch) p.catch(function () {});
+            };
+            tryAutoplay();
+            video.addEventListener('canplay', tryAutoplay, { once: true });
+            document.addEventListener('DOMContentLoaded', tryAutoplay);
+            // fallback: 1ª interação na página dispara play
+            ['touchstart','click'].forEach(function (ev) {
+                document.addEventListener(ev, tryAutoplay, { once: true, passive: true });
+            });
         })();
     </script>
 
