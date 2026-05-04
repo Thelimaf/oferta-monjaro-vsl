@@ -48,9 +48,9 @@
 
     <!-- HEADER -->
     <section id="hero">
-        <div class="d-flex justify-content-between align-items-center h-100 container">
+        <div class="hero-inner container">
             <h1 class="brand-title">SAÚDE</h1>
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+            <svg class="hero-menu" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M4 12h16"></path>
                 <path d="M4 18h16"></path>
@@ -77,36 +77,34 @@
             <div class="row m-0">
                 <div class="col-md-10 offset-md-1 p-0">
 
-                    <!-- PLAYER DE VÍDEO (HLS — vertical 4:5 — modo VSL) -->
+                    <!-- PLAYER DE VÍDEO (modo VSL — portrait 9:16-ish, sem controles) -->
                     <div class="video-wrapper vsl-mode" id="videoWrapper">
                         <video
                             id="vsl_video"
                             playsinline
                             webkit-playsinline
                             preload="auto"
-                            muted
                             poster="./assets/img/video-poster.jpg"
                             disablepictureinpicture
-                            controls
-                            controlslist="nodownload noplaybackrate noremoteplayback">
+                            controlslist="nodownload noplaybackrate noremoteplayback nofullscreen">
                         </video>
 
-                        <!-- Overlay "Clique para ativar o som" -->
-                        <div class="vsl-unmute-overlay" id="vslUnmute">
-                            <div class="vsl-unmute-inner">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-                                    <line x1="22" y1="9" x2="16" y2="15"/>
-                                    <line x1="16" y1="9" x2="22" y2="15"/>
-                                </svg>
-                                <p>Seu vídeo já começou</p>
-                                <span class="vsl-unmute-cta">CLIQUE PARA OUVIR</span>
+                        <!-- Overlay "Clique para assistir" (gesto de usuário desbloqueia áudio) -->
+                        <div class="vsl-play-overlay" id="vslPlay">
+                            <div class="vsl-play-inner">
+                                <div class="vsl-play-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="#fff">
+                                        <polygon points="6 4 20 12 6 20 6 4"/>
+                                    </svg>
+                                </div>
+                                <p>Seu vídeo está pronto</p>
+                                <span class="vsl-play-cta">CLIQUE PARA ASSISTIR</span>
                             </div>
                         </div>
-
-                        <!-- Barra de progresso VSL (vermelha, sem seek) -->
-                        <div class="vsl-progress"><div class="vsl-progress-bar" id="vslProgressBar"></div></div>
                     </div>
+
+                    <!-- Barra de progresso VSL (abaixo do vídeo) -->
+                    <div class="vsl-progress"><div class="vsl-progress-bar" id="vslProgressBar"></div></div>
 
                     <!-- BOTÃO CTA -->
                     <div id="btnDiv" class="text-center mt-4 mt-md-5">
@@ -224,14 +222,11 @@
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Vídeo VSL via HLS (Bunny Stream) -->
+    <!-- Vídeo VSL via HLS (carregamento — play disparado pelo overlay) -->
     <script>
         (function () {
             var video = document.getElementById('vsl_video');
             var hlsSrc = 'https://vz-9259434e-c92.b-cdn.net/7c306bff-d297-4cf8-b0a3-7f1a90bcad74/playlist.m3u8';
-
-            video.muted = true;
-            video.setAttribute('muted', '');
             video.setAttribute('playsinline', '');
 
             if (window.Hls && window.Hls.isSupported()) {
@@ -239,19 +234,8 @@
                 hls.loadSource(hlsSrc);
                 hls.attachMedia(video);
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                // Safari/iOS: HLS nativo
                 video.src = hlsSrc;
             }
-
-            var tryAutoplay = function () {
-                var p = video.play();
-                if (p && p.catch) p.catch(function () {});
-            };
-            video.addEventListener('canplay', tryAutoplay, { once: true });
-            document.addEventListener('DOMContentLoaded', tryAutoplay);
-            ['touchstart','click'].forEach(function (ev) {
-                document.addEventListener(ev, tryAutoplay, { once: true, passive: true });
-            });
         })();
     </script>
 

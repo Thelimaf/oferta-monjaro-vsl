@@ -39,9 +39,13 @@ img { max-width: 100%; height: auto; }
     width: 100%;
 }
 
-#hero .container {
+.hero-inner {
+    position: relative;
     height: 100%;
     max-width: 990px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #hero .brand-title {
@@ -50,6 +54,15 @@ img { max-width: 100%; height: auto; }
     font-weight: 700;
     letter-spacing: 1.5px;
     color: #ffffff;
+    text-align: center;
+}
+
+.hero-menu {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
 }
 
 /* ====================== MAIN / VÍDEO ====================== */
@@ -120,8 +133,9 @@ footer .container { padding-left: 16px !important; padding-right: 16px !importan
 .video-wrapper {
     position: relative;
     width: 100%;
+    max-width: 420px;
     margin: 0 auto;
-    padding-bottom: 56.25%; /* 16:9 — original mostra player horizontal com letterbox */
+    padding-bottom: 177.78%; /* 9:16 portrait fullscreen-like */
     height: 0;
     overflow: hidden;
     background: #000;
@@ -139,17 +153,18 @@ footer .container { padding-left: 16px !important; padding-right: 16px !importan
     border: 0;
 }
 
-/* =================== MODO VSL (sem controles) =================== */
+/* =================== MODO VSL =================== */
 .video-wrapper.vsl-mode video {
-    object-fit: contain; /* portrait dentro de 16:9 com letterbox lateral */
+    object-fit: cover;
     background: #000;
+    pointer-events: none; /* sem clique direto no vídeo */
 }
 
-/* Overlay "clique para ouvir" */
-.vsl-unmute-overlay {
+/* Overlay "clique para assistir" (gesto de usuário libera áudio) */
+.vsl-play-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.55);
+    background: rgba(0,0,0,0.6);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,48 +174,46 @@ footer .container { padding-left: 16px !important; padding-right: 16px !importan
     text-align: center;
     transition: opacity .25s ease;
 }
-.vsl-unmute-overlay.hidden {
+.vsl-play-overlay.hidden {
     opacity: 0;
     pointer-events: none;
 }
-.vsl-unmute-inner {
-    padding: 0 24px;
-}
-.vsl-unmute-inner svg {
-    margin-bottom: 12px;
+.vsl-play-inner { padding: 0 24px; }
+.vsl-play-icon {
+    width: 76px; height: 76px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    border: 3px solid #fff;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 14px;
     animation: vsl-pulse 1.4s ease-in-out infinite;
 }
-.vsl-unmute-inner p {
-    margin: 0 0 14px;
-    font-size: 16px;
-    opacity: 0.9;
-}
-.vsl-unmute-cta {
+.vsl-play-inner p { margin: 0 0 14px; font-size: 16px; opacity: 0.92; }
+.vsl-play-cta {
     display: inline-block;
     background: var(--color-cta);
     color: #fff;
     padding: 12px 28px;
     border-radius: 6px;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 15px;
     letter-spacing: 0.5px;
     box-shadow: 0 6px 20px rgba(40,167,69,0.4);
 }
 @keyframes vsl-pulse {
     0%,100% { transform: scale(1); }
-    50%     { transform: scale(1.12); }
+    50%     { transform: scale(1.08); }
 }
 
-/* Barra de progresso vermelha (sem seek) */
+/* Barra de progresso (abaixo do vídeo) */
 .vsl-progress {
-    position: absolute;
-    bottom: 0;
-    left: 0;
     width: 100%;
-    height: 4px;
-    background: rgba(255,255,255,0.12);
-    z-index: 5;
-    pointer-events: none;
+    max-width: 420px;
+    margin: 6px auto 0;
+    height: 5px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 3px;
+    overflow: hidden;
 }
 .vsl-progress-bar {
     width: 0%;
