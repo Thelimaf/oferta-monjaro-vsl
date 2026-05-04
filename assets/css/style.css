@@ -1,0 +1,363 @@
+/* ============================================================
+   VSL Landing Page — Estrutura clonada (sem conteúdo proprietário)
+   Customize cores/fontes na seção :root abaixo.
+   ============================================================ */
+
+:root {
+    --color-hero-bg: #1a1a1a;
+    --color-warning: rgba(166, 11, 13, 1);
+    --color-headline: #333333;
+    --color-text: #333333;
+    --color-muted: #989BA6;
+    --color-bg: #ffffff;
+    --color-footer-bg: #F5F5F5;
+    --color-cta: #28a745;
+    --color-cta-hover: #218838;
+    --color-cta-text: #ffffff;
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-main);
+    color: var(--color-text);
+    background: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img { max-width: 100%; height: auto; }
+
+/* ====================== HERO / HEADER ====================== */
+#hero {
+    background-color: var(--color-hero-bg);
+    color: #ffffff;
+    height: 60px;
+    width: 100%;
+}
+
+#hero .container {
+    height: 100%;
+    max-width: 990px;
+}
+
+#hero .brand-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #ffffff;
+}
+
+/* ====================== MAIN / VÍDEO ====================== */
+#mainSection {
+    padding: 24px 0;
+}
+
+#video_section {
+    max-width: 990px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+#headline .headline {
+    color: var(--color-headline);
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 15px;
+    font-size: 22px;
+    line-height: 1.3;
+}
+
+@media (min-width: 768px) {
+    #headline .headline { font-size: 28px; }
+}
+
+.headline .hl-warning {
+    color: var(--color-warning);
+    font-weight: 700;
+}
+
+.headline .hl-main {
+    font-weight: 700;
+}
+
+#headline .subtitle {
+    margin-bottom: 32px;
+    text-align: left;
+    line-height: 1.3;
+    font-weight: 500;
+    font-size: 16px;
+    color: #555;
+}
+
+@media (min-width: 768px) {
+    #headline .subtitle { font-size: 18px; }
+}
+
+/* ====================== PLAYER DE VÍDEO ====================== */
+#toggle_fullscreen {
+    max-width: 990px;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 480px;       /* trava largura no desktop — vídeo é portrait 1024x1280 */
+    margin: 0 auto;
+    padding-bottom: 125%;   /* 4:5 (vertical) */
+    height: 0;
+    overflow: hidden;
+    background: #000;
+    border-radius: 4px;
+}
+
+.video-wrapper video,
+.video-wrapper iframe,
+.video-wrapper > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* =================== MODO VSL (sem controles) =================== */
+.video-wrapper.vsl-mode video {
+    object-fit: cover;
+    pointer-events: none; /* bloqueia clique direto no vídeo */
+}
+
+/* Overlay "clique para ouvir" */
+.vsl-unmute-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    cursor: pointer;
+    color: #fff;
+    text-align: center;
+    transition: opacity .25s ease;
+}
+.vsl-unmute-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+.vsl-unmute-inner {
+    padding: 0 24px;
+}
+.vsl-unmute-inner svg {
+    margin-bottom: 12px;
+    animation: vsl-pulse 1.4s ease-in-out infinite;
+}
+.vsl-unmute-inner p {
+    margin: 0 0 14px;
+    font-size: 16px;
+    opacity: 0.9;
+}
+.vsl-unmute-cta {
+    display: inline-block;
+    background: var(--color-cta);
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 6px 20px rgba(40,167,69,0.4);
+}
+@keyframes vsl-pulse {
+    0%,100% { transform: scale(1); }
+    50%     { transform: scale(1.12); }
+}
+
+/* Barra de progresso vermelha (sem seek) */
+.vsl-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.12);
+    z-index: 5;
+    pointer-events: none;
+}
+.vsl-progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #e60000;
+    transition: width .25s linear;
+}
+
+/* ====================== CTA BUTTON ====================== */
+#btnDiv {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    #btnDiv { margin-top: 3rem; }
+}
+
+.btnProximoPasso {
+    display: none; /* Revelado por JS no tempo configurado */
+    background-color: var(--color-cta);
+    color: var(--color-cta-text);
+    border: none;
+    padding: 18px 48px;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.35);
+    transition: transform 0.15s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    line-height: 1.2;
+}
+
+.btnProximoPasso:hover,
+.btnProximoPasso:focus {
+    background-color: var(--color-cta-hover);
+    color: var(--color-cta-text);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(40, 167, 69, 0.45);
+    text-decoration: none;
+}
+
+.btnProximoPasso.revealed {
+    animation: btn-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes btn-pulse {
+    0%, 100% { box-shadow: 0 6px 20px rgba(40, 167, 69, 0.35); }
+    50%      { box-shadow: 0 6px 28px rgba(40, 167, 69, 0.65); }
+}
+
+.btn-subtitle {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #777;
+}
+
+/* ====================== SELOS / MEDIA REF ====================== */
+.media-ref {
+    padding: 32px 0;
+}
+
+.media {
+    max-width: 990px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.media-caption {
+    text-align: center;
+    color: var(--color-muted);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+}
+
+.media-slot img {
+    max-height: 35px;
+    width: auto;
+    opacity: 0.65;
+    transition: opacity 0.2s ease;
+}
+
+.media-slot img:hover { opacity: 1; }
+
+/* ====================== ACCORDION ====================== */
+.accordion-button {
+    color: var(--color-text);
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #f8f9fa;
+    color: var(--color-text);
+    box-shadow: none;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: transparent;
+}
+
+.accordion-body {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* ====================== FOOTER ====================== */
+footer {
+    background-color: var(--color-footer-bg);
+    color: var(--color-muted);
+}
+
+.footer-disclaimer {
+    max-width: 900px;
+    color: var(--color-muted) !important;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.footer-disclaimer small,
+.footer-contact small,
+.footer-payment small,
+.footer-copyright small {
+    font-size: 13px;
+}
+
+.footer-contact,
+.footer-payment {
+    color: var(--color-muted) !important;
+    line-height: 1.5;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.footer-payment img.img-fluid {
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.footer-bottom {
+    max-width: 900px;
+    gap: 5rem;
+}
+
+.footer-copyright {
+    color: var(--color-muted) !important;
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+}
+
+.footer-copyright small { font-size: 11.8px; }
+
+.footer-link {
+    color: var(--color-muted) !important;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    color: #555 !important;
+    text-decoration: underline;
+}
+
+.footer-logo {
+    max-width: 200px;
+    opacity: 0.85;
+}
+
+/* ====================== UTILITIES ====================== */
+.gap-4 { gap: 1.5rem; }

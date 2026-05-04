@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="none" />
+
+    <!--
+    ================================================================
+    CONFIGURAÇÃO PRINCIPAL DA VSL
+    ================================================================
+    -->
+    <script>
+        window.VSL_CONFIG = {
+            botaoLink: "https://info.doutornature.com/sfunnel/16782/",
+            // Tempo (segundos) para o botão CTA aparecer no vídeo
+            // Original utiliza valores entre 804 e 1200s — ajuste conforme seu funil
+            tempoExibirBotao: 966,
+            vslId: "humapro_vsl1",
+            cookieDias: 60
+        };
+    </script>
+
+    <title>URGENTE: Cientistas descobrem tratamento natural para perda de memória que pode ser feito em casa</title>
+    <link rel="icon" href="./assets/img/favicon.png" sizes="32x32" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+    <!-- HLS.js para streaming HLS direto da BunnyCDN -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js"></script>
+
+    <!-- CSS da página -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <!-- Google Tag Manager (substitua o ID) -->
+    <!--
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+    -->
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <section id="hero">
+        <div class="d-flex justify-content-between align-items-center h-100 container">
+            <h1 class="brand-title">SAÚDE</h1>
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 12h16"></path>
+                <path d="M4 18h16"></path>
+                <path d="M4 6h16"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- HEADLINE + VÍDEO -->
+    <section id="mainSection">
+        <div id="video_section" class="container p-0">
+            <div id="headline">
+                <h2 class="headline">
+                    <span class="hl-warning">Atenção!</span>
+                    <span class="hl-main">Nunca use esse <b>&ldquo;Mounjaro Natural&rdquo;</b> se não quiser trocar todo seu guarda-roupa</span>
+                </h2>
+                <p class="subtitle">
+                    Esse estranho truque força seu corpo a liberar quilos de gordura em apenas 3 semanas
+                </p>
+            </div>
+        </div>
+
+        <div id="toggle_fullscreen" class="container p-0 px-md-1">
+            <div class="row m-0">
+                <div class="col-md-10 offset-md-1 p-0">
+
+                    <!-- PLAYER DE VÍDEO (HLS — vertical 4:5 — modo VSL) -->
+                    <div class="video-wrapper vsl-mode" id="videoWrapper">
+                        <video
+                            id="vsl_video"
+                            playsinline
+                            webkit-playsinline
+                            preload="auto"
+                            muted
+                            poster="./assets/img/video-poster.jpg"
+                            disablepictureinpicture
+                            controlslist="nodownload nofullscreen noremoteplayback">
+                        </video>
+
+                        <!-- Overlay "Clique para ativar o som" -->
+                        <div class="vsl-unmute-overlay" id="vslUnmute">
+                            <div class="vsl-unmute-inner">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                                    <line x1="22" y1="9" x2="16" y2="15"/>
+                                    <line x1="16" y1="9" x2="22" y2="15"/>
+                                </svg>
+                                <p>Seu vídeo já começou</p>
+                                <span class="vsl-unmute-cta">CLIQUE PARA OUVIR</span>
+                            </div>
+                        </div>
+
+                        <!-- Barra de progresso VSL (vermelha, sem seek) -->
+                        <div class="vsl-progress"><div class="vsl-progress-bar" id="vslProgressBar"></div></div>
+                    </div>
+
+                    <!-- BOTÃO CTA -->
+                    <div id="btnDiv" class="text-center mt-4 mt-md-5">
+                        <a href="#" id="btnProx" class="btnProximoPasso btn btn-lg btn-primary shadow-lg" style="display:none;">
+                            Próximo Passo
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SELOS DE MÍDIA -->
+    <section class="media-ref">
+        <div class="media container">
+            <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-4">
+                <div><img src="./assets/img/terra.png" width="111" height="30" alt="Terra" loading="lazy"/></div>
+                <div><img src="./assets/img/agencia-estado.png" width="91" height="25" alt="Agência Estado" loading="lazy"/></div>
+                <div><img src="./assets/img/agencia-globo.png" width="96" height="24" alt="Agência O Globo" loading="lazy"/></div>
+            </div>
+            <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-4 mt-3">
+                <div><img src="./assets/img/ig.png" width="34" height="35" alt="IG" loading="lazy"/></div>
+                <div><img src="./assets/img/valor.png" width="77" height="28" alt="Econômico Valor" loading="lazy"/></div>
+                <div><img src="./assets/img/globo.png" width="117" height="18" alt="O Globo" loading="lazy"/></div>
+            </div>
+        </div>
+
+        <!-- Referências científicas -->
+        <div class="container d-flex flex-column" style="max-width: 900px;">
+            <hr style="width: 97%;">
+            <div class="accordion accordion-flush" id="accordionFlushScienceRefs" style="width: 100%;">
+                <div style="padding: 2rem;">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                aria-controls="flush-collapseOne" style="font-size: 20px; font-weight: 900;">
+                                Referências científicas
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse show"
+                            aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushScienceRefs">
+                            <div class="accordion-body" style="font-size: 14px;">
+                                1. Gefen T, Kim G, Bolbolan K, Geoly A, Ohm D, Oboudiyat C, Shahidehpour R, Rademaker A,
+                                Weintraub S, Bigio EH, Mesulam MM, Rogalski E, Geula C. Activated Microglia in Cortical
+                                White Matter Across Cognitive Aging Trajectories. Front Aging Neurosci. 2019 May
+                                14;11:94. doi: 10.3389/fnagi.2019.00094. PMID: 31139072; PMCID: PMC6527736.<br>
+                                2. Nayak D, Roth TL, McGavern DB. Microglia development and function. Annu Rev Immunol.
+                                2014;32:367-402. doi: 10.1146/annurev-immunol-032713-120240. Epub 2014 Jan 22. PMID:
+                                24471431; PMCID: PMC5001846.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-5">
+        <div class="container px-4">
+
+            <div class="d-flex justify-content-center">
+                <p class="footer-disclaimer">
+                    <small>
+                        Este produto não se destina a diagnosticar, tratar, curar ou prevenir qualquer doença, os
+                        resultados podem variar de pessoa para pessoa, esses depoimentos podem ser fictícios, esta
+                        informação não constitui aconselhamento medico e não deve ser considerada como tal, consulte o
+                        seu medico antes de modificar o seu regime médico regular. Este é um advertorial e não um artigo
+                        de notícia ou blog. Produto dispensado da obrigatoriedade de registro conforme RDC 240/2018.
+                    </small>
+                </p>
+            </div>
+
+            <div class="d-flex row justify-content-center">
+                <div class="col-12">
+                    <p class="footer-contact text-center">
+                        <small>
+                            Av. Setecentos, 651 Sala 56 Galpao 1-2-3-4 Quadra 17 - Terminal Intermodal da Serra. Serra/ES. - CEP: 29161-414 - Doutor Nature, CNPJ 26.434.850/0001-91
+                            <br>
+                            Whatsapp: (11) 91760-9911 | Email: <a href="mailto:contato@doutornature.com">contato@doutornature.com</a>
+                        </small>
+                    </p>
+                </div>
+                <div class="col-12">
+                    <p class="footer-payment text-center">
+                        <small>Pague com:</small>
+                        <img src="./assets/img/formas-pagamento.svg" class="img-fluid" alt="Formas de pagamento" style="max-width: 300px; opacity: .6;">
+                    </p>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <div class="footer-bottom d-row d-md-flex align-items-center justify-content-center">
+                    <div class="col-sm-3 ps-md-0">
+                        <img src="./assets/img/logo-footer.svg" class="img-fluid mb-3 mb-md-0 footer-logo" alt="Doutor Nature">
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="footer-copyright text-md-end">
+                            <small>
+                                © 2026 Doutor Nature - Todos os Direitos Reservados.
+                                <br class="d-block d-md-none">
+                                <a href="./politica-de-privacidade.html" class="footer-link">Política de Privacidade</a> |
+                                <a href="./termos-de-uso.html" class="footer-link">Termos de Uso</a>
+                            </small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Carregamento HLS via hls.js (com fallback nativo Safari/iOS) -->
+    <script>
+        (function () {
+            var video = document.getElementById('vsl_video');
+            // Por padrão usa o vídeo local; troque para a URL HLS se preferir streaming
+            var localSrc = './assets/video/vsl.mp4';
+            var hlsSrc   = 'https://vz-9259434e-c92.b-cdn.net/7c306bff-d297-4cf8-b0a3-7f1a90bcad74/playlist.m3u8';
+
+            // Use o local se existir; senão tenta HLS
+            var useHls = !window.USE_LOCAL_VIDEO; // setar window.USE_LOCAL_VIDEO=true antes para forçar local
+            if (useHls && window.Hls && window.Hls.isSupported()) {
+                var hls = new window.Hls();
+                hls.loadSource(hlsSrc);
+                hls.attachMedia(video);
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = hlsSrc;
+            } else {
+                video.src = localSrc;
+            }
+        })();
+    </script>
+
+    <script src="./assets/js/vsl-control.js"></script>
+
+    <!-- Headline dinâmica via querystring ?hl= -->
+    <script>
+        (function(){
+            function getParameterByName(name) {
+                var url = window.location.href;
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+            var headline = getParameterByName('hl');
+            if (headline && headline !== "") {
+                var titulos = document.getElementsByClassName("headline");
+                for (var i = 0; i < titulos.length; i++) titulos[i].innerText = headline;
+                document.title = headline;
+            }
+        })();
+    </script>
+
+</body>
+</html>

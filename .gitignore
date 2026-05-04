@@ -1,0 +1,14 @@
+# Vídeo VSL — distribuído via GitHub Release (não no repo)
+assets/video/*.mp4
+assets/video/*.webm
+assets/video/*.mov
+
+# Análise / referência
+_analise/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
