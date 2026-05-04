@@ -1,0 +1,264 @@
+/* ============================================================
+   QUIZ — estrutura espelhada do padrão Atomicat (single SPA)
+   Edite cor/tipografia em :root.
+   ============================================================ */
+
+:root {
+    --quiz-primary: #4bd3a6;
+    --quiz-primary-hover: #3bbd92;
+    --quiz-text: #1a1a1a;
+    --quiz-muted: #6b7280;
+    --quiz-bg: #f9fafb;
+    --quiz-card: #ffffff;
+    --quiz-border: #e5e7eb;
+    --quiz-radius: 12px;
+    --quiz-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--quiz-font);
+    color: var(--quiz-text);
+    background: var(--quiz-bg);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+img { max-width: 100%; height: auto; }
+
+/* ============= HEADER ============= */
+.quiz-header {
+    background: #a60b0d;
+    color: #fff;
+    height: 56px;
+}
+.quiz-header-inner {
+    height: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+}
+.quiz-brand {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+/* ============= WRAPPER ============= */
+.quiz-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+}
+
+/* ============= PROGRESS BAR ============= */
+.quiz-progress {
+    position: relative;
+    width: 100%;
+    height: 10px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 8px 0 28px;
+}
+.quiz-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--quiz-primary);
+    border-radius: 999px;
+    transition: width 0.6s ease;
+}
+.quiz-progress-pct {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    mix-blend-mode: difference;
+    pointer-events: none;
+}
+
+/* ============= STEPS ============= */
+.quiz-steps {
+    background: var(--quiz-card);
+    border: 1px solid var(--quiz-border);
+    border-radius: var(--quiz-radius);
+    padding: 32px 24px;
+    min-height: 280px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+}
+
+.quiz-step {
+    display: none;
+    animation: fadeIn 0.35s ease;
+}
+.quiz-step.active { display: block; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.quiz-title {
+    margin: 0 0 16px;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.3;
+}
+@media (min-width: 768px) {
+    .quiz-title { font-size: 28px; }
+}
+
+.quiz-text {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.55;
+    text-align: center;
+    color: var(--quiz-muted);
+}
+
+/* ============= INPUTS ============= */
+.quiz-field {
+    margin: 24px auto 0;
+    max-width: 360px;
+}
+.quiz-input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 17px;
+    font-family: inherit;
+    border: 2px solid var(--quiz-border);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--quiz-text);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.quiz-input:focus {
+    border-color: var(--quiz-primary);
+    box-shadow: 0 0 0 3px rgba(75,211,166,0.18);
+}
+.quiz-input.error {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239,68,68,0.15);
+}
+
+/* ============= MULTI-CHOICE COM IMAGENS ============= */
+.quiz-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+@media (min-width: 480px) {
+    .quiz-options { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+}
+
+.quiz-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 10px;
+    background: #fff;
+    border: 2px solid var(--quiz-border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    font-family: inherit;
+    color: var(--quiz-text);
+    min-height: 130px;
+    justify-content: center;
+}
+.quiz-option:hover {
+    border-color: var(--quiz-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+}
+.quiz-option.selected {
+    border-color: var(--quiz-primary);
+    background: rgba(75,211,166,0.08);
+    box-shadow: 0 0 0 3px rgba(75,211,166,0.18);
+}
+.quiz-option-img {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+}
+@media (max-width: 480px) {
+    .quiz-option-img { width: 60px; height: 60px; }
+}
+.quiz-option-label {
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* ============= NAVEGAÇÃO ============= */
+.quiz-nav {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    margin-top: 24px;
+}
+.quiz-btn {
+    flex: 1;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: inherit;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.18s ease;
+    letter-spacing: 0.3px;
+}
+.quiz-btn--prev {
+    background: #fff;
+    color: var(--quiz-muted);
+    border: 2px solid var(--quiz-border);
+    flex: 0 0 auto;
+    min-width: 120px;
+}
+.quiz-btn--prev:hover { background: #f3f4f6; }
+.quiz-btn--next {
+    background: var(--quiz-primary);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(75,211,166,0.35);
+}
+.quiz-btn--next:hover {
+    background: var(--quiz-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(75,211,166,0.45);
+}
+.quiz-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none !important;
+}
+.quiz-btn[hidden] { display: none; }
+
+/* ============= ERROR MESSAGE ============= */
+.quiz-error-msg {
+    margin: 12px auto 0;
+    padding: 10px 14px;
+    background: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    max-width: 360px;
+}

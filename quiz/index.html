@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>Avaliação Personalizada</title>
+    <link rel="icon" href="../assets/img/favicon.png" sizes="32x32">
+
+    <!--
+    ================================================================
+    CONFIGURAÇÃO PRINCIPAL DO QUIZ
+    Edite os valores abaixo. Cada step pode ser editado direto no HTML.
+    ================================================================
+    -->
+    <script>
+        window.QUIZ_CONFIG = {
+            // Cor primária (barra de progresso e botão Próximo)
+            corPrimaria: "#4bd3a6",
+
+            // Para onde redirecionar ao finalizar (último step "Avançar")
+            linkFinal: "../index.html",
+
+            // Habilitar barra de progresso animada
+            mostrarProgresso: true,
+
+            // Storage key para salvar respostas (recuperar se usuário recarregar)
+            storageKey: "quiz_monjaro_respostas",
+
+            // Identificador para tracking
+            quizId: "quiz_monjaro_v1"
+        };
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./assets/css/quiz.css">
+</head>
+
+<body>
+
+    <!-- HEADER OPCIONAL -->
+    <header class="quiz-header">
+        <div class="quiz-header-inner">
+            <h1 class="quiz-brand">SAÚDE</h1>
+        </div>
+    </header>
+
+    <!-- QUIZ CONTAINER -->
+    <main class="quiz-wrapper">
+
+        <!-- BARRA DE PROGRESSO -->
+        <div class="quiz-progress">
+            <div class="quiz-progress-bar" id="quizProgressBar" style="width: 0%;"></div>
+            <span class="quiz-progress-pct" id="quizProgressPct">0%</span>
+        </div>
+
+        <!-- ============= STEPS DO QUIZ =============
+             Cada .quiz-step é um passo. data-step define a ordem (1..N).
+             data-progress define a % da barra ao chegar nesse step.
+             Para edição: troque títulos, inputs e opções livremente. -->
+        <div class="quiz-steps" id="quizSteps">
+
+            <!-- ===== STEP 1 — Welcome ===== -->
+            <section class="quiz-step quiz-step--welcome active" data-step="1" data-progress="10">
+                <h2 class="quiz-title">Bem-vindo!</h2>
+                <p class="quiz-text">
+                    Antes de começar, responda <strong>4 perguntas simples</strong> para que possamos
+                    personalizar seu protocolo de acordo com seu corpo e seus objetivos.
+                </p>
+            </section>
+
+            <!-- ===== STEP 2 — Idade ===== -->
+            <section class="quiz-step" data-step="2" data-progress="30">
+                <h2 class="quiz-title">Qual é a sua idade?</h2>
+                <div class="quiz-field">
+                    <input
+                        type="number"
+                        id="campo_idade"
+                        name="idade"
+                        class="quiz-input"
+                        placeholder="Apenas o número"
+                        min="14"
+                        max="120"
+                        inputmode="numeric"
+                        data-required="true">
+                </div>
+            </section>
+
+            <!-- ===== STEP 3 — Peso atual ===== -->
+            <section class="quiz-step" data-step="3" data-progress="50">
+                <h2 class="quiz-title">Qual é o seu peso atual?</h2>
+                <div class="quiz-field">
+                    <input
+                        type="number"
+                        id="campo_peso"
+                        name="peso"
+                        class="quiz-input"
+                        placeholder="Seu peso em kg"
+                        min="30"
+                        max="300"
+                        step="0.1"
+                        inputmode="decimal"
+                        data-required="true">
+                </div>
+            </section>
+
+            <!-- ===== STEP 4 — Altura ===== -->
+            <section class="quiz-step" data-step="4" data-progress="70">
+                <h2 class="quiz-title">Qual é a sua altura?</h2>
+                <div class="quiz-field">
+                    <input
+                        type="number"
+                        id="campo_altura"
+                        name="altura"
+                        class="quiz-input"
+                        placeholder="Sua altura em metros (ex: 1.65)"
+                        min="1.0"
+                        max="2.5"
+                        step="0.01"
+                        inputmode="decimal"
+                        data-required="true">
+                </div>
+            </section>
+
+            <!-- ===== STEP 5 — Multi-choice com imagens (Quantos kg quer perder?) ===== -->
+            <section class="quiz-step" data-step="5" data-progress="90">
+                <h2 class="quiz-title">Quantos quilos você gostaria de perder?</h2>
+                <div class="quiz-options" data-name="objetivo" data-required="true">
+
+                    <!-- Edite as opções: o data-value é o que será salvo nas respostas -->
+                    <button type="button" class="quiz-option" data-value="ate_5kg">
+                        <img src="./assets/img/opcao-1.png" alt="" class="quiz-option-img" onerror="this.style.display='none'">
+                        <span class="quiz-option-label">Até 5 kg</span>
+                    </button>
+
+                    <button type="button" class="quiz-option" data-value="5_a_10kg">
+                        <img src="./assets/img/opcao-2.png" alt="" class="quiz-option-img" onerror="this.style.display='none'">
+                        <span class="quiz-option-label">5 a 10 kg</span>
+                    </button>
+
+                    <button type="button" class="quiz-option" data-value="10_a_20kg">
+                        <img src="./assets/img/opcao-3.png" alt="" class="quiz-option-img" onerror="this.style.display='none'">
+                        <span class="quiz-option-label">10 a 20 kg</span>
+                    </button>
+
+                    <button type="button" class="quiz-option" data-value="mais_20kg">
+                        <img src="./assets/img/opcao-4.png" alt="" class="quiz-option-img" onerror="this.style.display='none'">
+                        <span class="quiz-option-label">Mais de 20 kg</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ===== STEP 6 — Final ===== -->
+            <section class="quiz-step quiz-step--final" data-step="6" data-progress="100">
+                <h2 class="quiz-title">Pronto!</h2>
+                <p class="quiz-text">
+                    Falta apenas um passo.<br><br>
+                    Na próxima página, você terá acesso imediato ao seu <strong>protocolo personalizado</strong>.
+                </p>
+            </section>
+
+        </div>
+
+        <!-- BOTÕES DE NAVEGAÇÃO -->
+        <div class="quiz-nav">
+            <button type="button" class="quiz-btn quiz-btn--prev" id="quizPrev" hidden>
+                Anterior
+            </button>
+            <button type="button" class="quiz-btn quiz-btn--next" id="quizNext">
+                Próximo
+            </button>
+        </div>
+
+    </main>
+
+    <script src="./assets/js/quiz.js"></script>
+</body>
+</html>
